@@ -66,12 +66,25 @@ $(document).ready(function(){
     function endGame(correct, incorrect, unanswered) {
         
         var endDiv = $("<div>");
+        var resetButton = $("<button>");
+
         $("#game-holster").empty();
+
         $(endDiv).addClass("game-item");
-        $(endDiv).css("margin-top", "200px")
+        $(endDiv).css("margin-top", "200px");
+
+        resetButton.attr("id", "start-button");        
+        $(resetButton).css("margin-top", "25px");
+        $(resetButton).text("Restart");
+        $(resetButton).on("click", reload);
 
         $("#game-holster").append(endDiv);
+        $("#game-holster").append(resetButton);
         $(endDiv).html("<p>You got " + correct + " correct!</p><p>You got " + incorrect + " wrong!</p><p>You skipped " + unanswered + " questions.</p>");
         console.log(endDiv.text);
+    }
+
+    function reload(){
+        window.location = "game.html";
     }
 });
