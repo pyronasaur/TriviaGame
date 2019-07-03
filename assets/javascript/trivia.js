@@ -5,8 +5,14 @@ $(document).ready(function(){
     var intervalId;
 
     var correctCount = 0;
+    var incorrectCount = 0;
+    var unanswered = 0;
 
     window.onload = start;
+
+    $("#start-button").on("click",function(){
+        window.location = "game.html";
+    });
 
     function start() {
         if (!clockRunning) {
@@ -22,7 +28,7 @@ $(document).ready(function(){
             clearInterval(intervalId);
             clockRunning = false;
             countAnswers;
-            endGame(correctCount);
+            endGame(correctCount, incorrectCount, unanswered);
         }
 
         $("#timer").text(time);
@@ -32,13 +38,14 @@ $(document).ready(function(){
         console.log("button was clicked");
 
         countAnswers();
-        endGame(correctCount);
+        endGame(correctCount, incorrectCount, unanswered);
 
     })
 
     function countAnswers(){
         var q = $("input:checked");
-        console.log(q);
+        console.log(q.length);
+        unanswered = 4 - q.length; //4 is the number of questions, could write code to count number of questions
 
         for(let item of q) {
             console.log(item);
@@ -49,18 +56,22 @@ $(document).ready(function(){
             item.value === "which") {
                 correctCount++;
             }
+            else {
+                incorrectCount++;
+            }
         }
         console.log("correctCount: " + correctCount);
     }
 
-    function endGame(score) {
+    function endGame(correct, incorrect, unanswered) {
         
         var endDiv = $("<div>");
         $("#game-holster").empty();
-        $(endDiv).addClass("game-item");       
+        $(endDiv).addClass("game-item");
+        $(endDiv).css("margin-top", "200px")
 
         $("#game-holster").append(endDiv);
-        $(endDiv).html("<p>You got " + correctCount + " correct!</p>");
+        $(endDiv).html("<p>You got " + correct + " correct!</p><p>You got " + incorrect + " wrong!</p><p>You skipped " + unanswered + " questions.</p>");
         console.log(endDiv.text);
     }
 });

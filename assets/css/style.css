@@ -2,25 +2,38 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Bitter', serif;
 }
+
 body {
     background-image: url("../images/banana.jpg");
     background-size: cover;
 }
+
+h1 {
+    color: green;
+}
+
+h4 {
+    color: dimgrey;
+}
+
 .head-space {
     height: 100px;
 }
+
 .container {
     display: flex; /* or inline-flex */
     flex-direction: row;
     justify-content: center; 
     padding: 20px 0;
     
-  }
+}
 
 .game-container {
     border: 1px solid #fff;
     width: 900px;
+    min-height: 500px;
     display: flex;
     justify-content: space-around;
     background-color: palegoldenrod;
@@ -46,5 +59,12 @@ body {
 .label {
     margin-top: 40px;
     margin-bottom: 15px;
+}
+
+#start-button {
+    background-color: palegoldenrod;
+    width: 200px;
+    height: 50px;
+    margin-top: 200px;
 }
 
